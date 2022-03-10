@@ -48,7 +48,16 @@ export const newGamesUrl = () => {
   return `${base_url}${newGames}`;
 };
 
-console.log(newGamesUrl());
+// console.log(newGamesUrl());
 
 // console.log(upcomingGamesUrl());
 //we have to run this function as this upcomingGamesUrl is a function
+//GAMES DETAILS
+export const gamesDetailsUrl = (game_id) =>
+  `${base_url}games/${game_id}?key=d564ce53d9844f54b9e9351893ec8b31`;
+// api.rawg.io/api/games/303576?key=d564ce53d9844f54b9e9351893ec8b31
+// https: console.log(gamesDetailsUrl());
+
+//SCREEN SHOTS
+export const gamesScreenUrl = (game_id) =>
+  `${base_url}games/${game_id}/screenshots?key=d564ce53d9844f54b9e9351893ec8b31`;
