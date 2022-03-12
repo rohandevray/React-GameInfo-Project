@@ -42,6 +42,10 @@ const GlobalStyles = createGlobalStyle`
       text-decoration: none;
       color: #333;
   }
+  img{
+      display: block; //as it inside the card with width:100% 
+      //with display blcok it takes the whole width accurately . (yeah thats it)
+  }
 `;
 
 export default GlobalStyles;
