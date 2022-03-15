@@ -61,3 +61,8 @@ export const gamesDetailsUrl = (game_id) =>
 //SCREEN SHOTS
 export const gamesScreenUrl = (game_id) =>
   `${base_url}games/${game_id}/screenshots?key=d564ce53d9844f54b9e9351893ec8b31`;
+//fetch searched games
+
+export const searchedGameUrl = (game_name) => `
+    ${base_url}games?search=${game_name}&key=d564ce53d9844f54b9e9351893ec8b31&page_size=9
+`;

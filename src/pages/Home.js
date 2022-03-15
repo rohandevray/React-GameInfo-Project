@@ -9,6 +9,7 @@ import Game from "../components/Game";
 import styled from "styled-components";
 import { motion, AnimatePresence, AnimateSharedLayout } from "framer-motion";
 import { useLocation } from "react-router-dom";
+import { fadeIn, popUp } from "../animation";
 
 const Home = () => {
   //get the current location
@@ -25,14 +26,35 @@ const Home = () => {
   //fetch ONLY ONE TIME and useEffect goona run when dispatch happens ,[dispatch]
   //we now get the data from state (BIG STATE CALLED REDUX STORE/STATE)
   //   const games = useSelector((state) => state.games);
-  const { popular, newGames, upcoming } = useSelector((state) => state.games);
+  const { popular, newGames, upcoming, searched } = useSelector(
+    (state) => state.games
+  );
 
   return (
-    <GameList>
+    <GameList variants={fadeIn} initial="hidden" animate="show">
       <AnimateSharedLayout type="crossfade">
         <AnimatePresence>
           {pathId && <GameDetail pathId={pathId} />}
         </AnimatePresence>
+        {searched.length ? (
+          <div className="searched">
+            <h2>Searched Games</h2>
+            <Games>
+              {searched.map((game) => (
+                <Game
+                  name={game.name}
+                  released={game.released}
+                  id={game.id}
+                  image={game.background_image}
+                  key={game.id} //when we get error of key or child related things
+                />
+              ))}
+            </Games>
+          </div>
+        ) : (
+          " "
+        )}
+
         <h2>Upcoming Games</h2>
         <Games>
           {upcoming.map((game) => (
@@ -76,12 +98,14 @@ const Home = () => {
 const GameList = styled(motion.div)`
   padding: 0rem 5rem;
   h2 {
-    padding: 5rem 0rem;
+    padding: 3.7rem 0rem;
   }
 `;
 
 const Games = styled(motion.div)`
   min-height: 70vh;
+  position: relative;
+  top: -0.5rem;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
   grid-column-gap: 2.1rem;
